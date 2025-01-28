@@ -1,0 +1,3 @@
+BasedOnStyle: Google
+LineEnding: LF
+InsertNewlineAtEOF: true
