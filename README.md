@@ -1,6 +1,6 @@
 # Kero Variant Utils
 
-**Kero Variant Utils** is an ergonomic, header-only C++ library designed to simplify handling `std::variant` alternatives. It provides **compile-time validation** to ensure all alternatives are handled, making your code safer and more robust.
+🐸 **Kero Variant Utils** is an ergonomic, header-only C++ library designed to simplify handling `std::variant` alternatives. It provides **compile-time validation** to ensure all alternatives are handled, making your code safer and more robust.
 
 ## Key Features
 
