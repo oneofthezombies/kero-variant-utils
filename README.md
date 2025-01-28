@@ -14,35 +14,22 @@ This library is perfect for scenarios where exhaustive handling of `std::variant
 ## Examples
 
 ```cpp
-#include <iostream>
-#include <variant>
-#include <string>
+struct MyValue {};
+struct MyError {};
+using MyResult = std::variant<MyValue, MyError>;
 
-#include <kero_variant_utils/kero_variant_utils.h>
+// Visit with lambda
+MyResult v = MyValue{};
+auto res = kero::Visit(
+    v, [](MyValue) -> bool { return true; },
+    [](MyError) -> bool { return false; });
 
-using MyVariant = std::variant<int, std::string>;
+assert(res == true);
 
-int main() {
-  MyVariant v = 1;
-
-  {
-    // Using lambda
-    kero::Visit(v,
-        [](int i) { std::cout << "int: " << i << std::endl; },
-        [](const std::string& s) { std::cout << "string: " << s << std::endl; });
-  }
-
-  {
-    // Using struct
-    struct MyVisitor {
-      void operator()(int i) { std::cout << "int: " << i << std::endl; }
-      void operator()(const std::string& s) { std::cout << "string: " << s << std::endl; }
-    };
-    kero::Visit(v, MyVisitor{});
-  }
-
-  return 0;
-}
+// Incomplete visitor (compile-time error)
+// "Visitor does not handle all alternatives in the variant!"
+MyResult v = MyValue{};
+// auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
 ```
 
 ## Compiler Support

@@ -1,55 +1,61 @@
 #include <kero_variant_utils/kero_variant_utils.h>
 
-#include <iostream>
-#include <string>
+#include <cassert>
+#include <memory>
 #include <variant>
 
+struct MyValue {};
+struct MyError {};
+using MyResult = std::variant<MyValue, MyError>;
+using NonCopyableVariant =
+    std::variant<std::unique_ptr<MyValue>, std::unique_ptr<MyError>>;
+
 int main() {
+  // Visit with lambda
   {
-    using MyVariant = std::variant<int, std::string>;
+    MyResult v = MyValue{};
+    auto res = kero::Visit(
+        v, [](MyValue) -> bool { return true; },
+        [](MyError) -> bool { return false; });
 
-    // Test with int
-    {
-      MyVariant value = 42;
-      kero::Visit(
-          value, [](int x) { std::cout << "Int: " << x << '\n'; },
-          [](const std::string& s) { std::cout << "String: " << s << '\n'; });
-    }
-
-    // Test with string
-    {
-      MyVariant value = "Hello, World!";
-      kero::Visit(
-          value, [](int x) { std::cout << "Int: " << x << '\n'; },
-          [](const std::string& s) { std::cout << "String: " << s << '\n'; });
-    }
+    assert(res == true);
   }
 
+  // Incomplete visitor (compile-time error)
+  // "Visitor does not handle all alternatives in the variant!"
   {
-    struct A {
-      A() = default;
-      ~A() = default;
-      A(const A&) = delete;
-      A& operator=(const A&) = delete;
-      A(A&&) = default;
-      A& operator=(A&&) = default;
+    MyResult v = MyValue{};
+    // auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
+  }
+
+  // Visit with Custom Visitor struct
+  {
+    struct MyVisitor {
+      bool operator()(MyValue) { return false; }
+      bool operator()(MyError) { return true; }
     };
+    MyResult v = MyError{};
+    auto res = kero::Visit(v, MyVisitor{});
 
-    struct B {
-      B() = default;
-      ~B() = default;
-      B(const B&) = delete;
-      B& operator=(const B&) = delete;
-      B(B&&) = default;
-      B& operator=(B&&) = default;
-    };
+    assert(res == true);
+  }
 
-    using MyVariant = std::variant<A, B>;
+  // Visit with non-copyable r-value
+  {
+    NonCopyableVariant v{std::make_unique<MyValue>()};
+    auto res = kero::Visit(
+        std::move(v), [](std::unique_ptr<MyValue>) -> bool { return true; },
+        [](std::unique_ptr<MyError>) -> bool { return false; });
 
-    MyVariant value{A{}};
-    kero::Visit(
-        std::move(value), [](A&&) { std::cout << "A\n"; },
-        [](B&&) { std::cout << "B\n"; });
+    assert(res == true);
+  }
+
+  // Reference type to non-copyable r-value (compile-time error)
+  {
+    NonCopyableVariant v{std::make_unique<MyValue>()};
+    // auto res = kero::Visit(
+    //     std::move(v), [](std::unique_ptr<MyValue>&) -> bool { return true; },
+    //     [](std::unique_ptr<MyError>&) -> bool { return false; });
   }
 
   return 0;
