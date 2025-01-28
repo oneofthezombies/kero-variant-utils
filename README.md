@@ -47,11 +47,13 @@ int main() {
 
 ## Compiler Support
 
-| C++ Standard | GCC Version    | Clang Version  | MSVC Version |
-| ------------ | -------------- | -------------- | ------------ |
-| C++17        | Not tested yet | Not tested yet | 19.38.33134  |
-| C++20        | Not tested yet | Not tested yet | 19.38.33134  |
-| C++23        | Not tested yet | Not tested yet | 19.38.33134  |
+The following versions have been fully tested:
+
+| C++ Standard | GCC Version | Clang Version | MSVC Version |
+| ------------ | ----------- | ------------- | ------------ |
+| C++17        | 12.2.0      | 18.1.8        | 19.38.33134  |
+| C++20        | 12.2.0      | 18.1.8        | 19.38.33134  |
+| C++23        | 12.2.0      | 18.1.8        | 19.38.33134  |
 
 ## Contributing
 
