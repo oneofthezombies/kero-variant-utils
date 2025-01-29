@@ -81,6 +81,7 @@ target_link_libraries(<your_target> PRIVATE kero::variant_utils)
 curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.4.1.tar.gz -o kero_variant_utils.tar.gz
 mkdir -p kero_variant_utils
 tar -C kero_variant_utils --strip-components=1 -xf kero_variant_utils.tar.gz
+rm -rf kero_variant_utils.tar.gz
 ```
 
 2. Add include search path
