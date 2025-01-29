@@ -35,6 +35,8 @@ MyResult v = MyValue{};
 // auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
 ```
 
+See [examples/example.cc](examples/example.cc) for more examples.
+
 ## How to Include
 
 ### Using CMake FetchContent (recommended)
