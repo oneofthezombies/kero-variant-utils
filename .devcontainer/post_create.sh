@@ -15,6 +15,4 @@ ninja --version
 # Check JavaScript
 volta --version
 node --version
-npm --version
 gitmoji --version
-tsx --version

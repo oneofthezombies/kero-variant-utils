@@ -10,8 +10,8 @@ RUN apt update && \
     git \
     # To open in a browser on the host
     xdg-utils \
-    lsb-release \
     # LLVM
+    lsb-release \
     wget \
     software-properties-common \
     gnupg \
@@ -23,9 +23,9 @@ RUN apt update && \
     lld-18 \
     libc++-18-dev \
     libc++abi-18-dev \
-    # For cmake-format
+    # For install cmake-format
     pipx \
-    # For ninja
+    # ninja
     ninja-build \
     && apt clean && \
     rm -rf "/var/lib/apt/lists/*" && \
@@ -56,9 +56,7 @@ RUN echo '# JavaScript' >> ~/.bashrc && \
     curl https://get.volta.sh | bash && \
     volta install \
     node@22.13.0 \
-    npm@11.0.0 \
     gitmoji-cli@9.5.0 \
-    tsx@4.19.2 \
     && echo '' >> ~/.bashrc
 
 RUN pipx ensurepath && \
