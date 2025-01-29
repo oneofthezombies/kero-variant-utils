@@ -45,7 +45,7 @@ include(FetchContent)
 FetchContent_Declare(
   kero_variant_utils
   GIT_REPOSITORY https://github.com/oneofthezombies/kero-variant-utils.git
-  GIT_TAG v0.3.0)
+  GIT_TAG v0.4.0)
 FetchContent_MakeAvailable(kero_variant_utils)
 
 target_link_libraries(<your_target> PRIVATE kero::variant_utils)
@@ -56,7 +56,7 @@ target_link_libraries(<your_target> PRIVATE kero::variant_utils)
 1. Download and install
 
 ```bash
-curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.3.0.tar.gz -o kero_variant_utils.tar.gz
+curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.4.0.tar.gz -o kero_variant_utils.tar.gz
 mkdir -p kero_variant_utils
 tar -C kero_variant_utils --strip-components=1 -xf kero_variant_utils.tar.gz
 cmake -S kero_variant_utils -B kero_variant_utils/build
@@ -78,7 +78,7 @@ target_link_libraries(<your_target> PRIVATE kero::variant_utils)
 1. Download
 
 ```bash
-curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.3.0.tar.gz -o kero_variant_utils.tar.gz
+curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.4.0.tar.gz -o kero_variant_utils.tar.gz
 mkdir -p kero_variant_utils
 tar -C kero_variant_utils --strip-components=1 -xf kero_variant_utils.tar.gz
 ```

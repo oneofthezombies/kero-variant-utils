@@ -14,7 +14,7 @@ set(package_targets_name ${package_name}Targets)
 
 project(
   ${package_name}
-  VERSION 0.3.0
+  VERSION 0.4.0
   LANGUAGES CXX)
 
 add_library(${library_name} INTERFACE)
