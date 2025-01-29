@@ -33,6 +33,17 @@ MyResult v = MyValue{};
 // auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
 ```
 
+## Installation
+
+### CMake
+
+```bash
+cmake -B build
+cmake --install build
+# or change the install prefix
+# cmake --install build --prefix <path>
+```
+
 ## Compiler and Standard Support
 
 The following versions have been fully tested:
