@@ -33,15 +33,62 @@ MyResult v = MyValue{};
 // auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
 ```
 
-## Installation
+## How to Include
+
+### Manual Installation
+
+1. Clone the repository
+
+```bash
+git clone --branch v0.3.0 --depth 1 https://github.com/oneofthezombies/kero-variant-utils.git
+```
+
+2. Add to include search path
+
+```bash
+clang -I<kero_variant_utils_repo>
+# or
+g++ -I<kero_variant_utils_repo>
+```
 
 ### CMake
+
+#### Using FetchContent
+
+```cmake
+# in your CMakeLists.txt
+include(FetchContent)
+FetchContent_Declare(
+  kero_variant_utils
+  GIT_REPOSITORY https://github.com/oneofthezombies/kero-variant-utils.git
+  GIT_TAG v0.3.0)
+FetchContent_MakeAvailable(kero_variant_utils)
+
+target_include_directories(<your_target> PRIVATE ${kero_variant_utils_SOURCE_DIR})
+```
+
+#### Using CMake Package
+
+1. Checkout the repository
+
+```bash
+git clone --branch v0.3.0 --depth 1 https://github.com/oneofthezombies/kero-variant-utils.git
+```
+
+2. Build and install
 
 ```bash
 cmake -B build
 cmake --install build
-# or change the install prefix
-# cmake --install build --prefix <path>
+```
+
+3. Use in your project
+
+```cmake
+# in your CMakeLists.txt
+find_package(kero_variant_utils REQUIRED)
+
+target_include_directories(<your_target> PRIVATE ${kero_variant_utils_SOURCE_DIR})
 ```
 
 ## Compiler and Standard Support
