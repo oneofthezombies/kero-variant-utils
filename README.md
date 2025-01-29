@@ -1,13 +1,14 @@
 # Kero Variant Utils
 
-🐸 **Kero Variant Utils** is an ergonomic, header-only C++ library designed to simplify handling `std::variant` alternatives. It provides **compile-time validation** to ensure all alternatives are handled, making your code safer and more robust.
+🐸 **Kero Variant Utils** is an ergonomic, header-only C++ library designed to simplify handling `std::variant` alternatives.  
+It provides **compile-time validation** to ensure all alternatives are handled, making your code safer and more robust.
 
 ## Key Features
 
+- **Ergonomic API**: Clean, expressive, and easy-to-use interface for handling variants.
 - **Compile-Time Validation**: Guarantees that all `std::variant` alternatives are handled by your handlers during compilation.
 - **Header-Only**: Easy to integrate into your project with no additional dependencies.
-- **Wide Compiler and Standard Support**: Compatible with `C++17`, `C++20`, and `C++23`, and tested with major compilers including GCC, Clang, and MSVC.
-- **Ergonomic API**: Clean, expressive, and easy-to-use interface for handling variants.
+- **Wide Compiler and Standard Support**: Tested with C++17, C++20, and C++23 standards, and major compilers including GCC, Clang, and MSVC.
 
 This library is perfect for scenarios where exhaustive handling of `std::variant` alternatives is critical for code correctness and maintainability.
 
@@ -32,7 +33,7 @@ MyResult v = MyValue{};
 // auto res = kero::Visit(v, [](MyValue) -> bool { return true; });
 ```
 
-## Compiler Support
+## Compiler and Standard Support
 
 The following versions have been fully tested:
 
