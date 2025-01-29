@@ -35,28 +35,10 @@ MyResult v = MyValue{};
 
 ## How to Include
 
-### Manual Installation
-
-1. Clone the repository
-
-```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/oneofthezombies/kero-variant-utils.git
-```
-
-2. Add to include search path
-
-```bash
-clang -I<kero_variant_utils_repo>
-# or
-g++ -I<kero_variant_utils_repo>
-```
-
-### CMake
-
-#### Using FetchContent
+### Using CMake FetchContent (recommended)
 
 ```cmake
-# in your CMakeLists.txt
+# CMakeLists.txt
 include(FetchContent)
 FetchContent_Declare(
   kero_variant_utils
@@ -64,31 +46,47 @@ FetchContent_Declare(
   GIT_TAG v0.3.0)
 FetchContent_MakeAvailable(kero_variant_utils)
 
-target_include_directories(<your_target> PRIVATE ${kero_variant_utils_SOURCE_DIR})
+target_link_libraries(<your_target> PRIVATE kero_variant_utils)
 ```
 
-#### Using CMake Package
+### Using Installable CMake Package
 
-1. Checkout the repository
+1. Download and install
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/oneofthezombies/kero-variant-utils.git
+curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.3.0.tar.gz -o kero_variant_utils.tar.gz
+mkdir -p kero_variant_utils
+tar -C kero_variant_utils --strip-components=1 -xf kero_variant_utils.tar.gz
+cmake -S kero_variant_utils -B kero_variant_utils/build
+cmake --install kero_variant_utils/build
+rm -rf kero_variant_utils.tar.gz kero_variant_utils
 ```
 
-2. Build and install
-
-```bash
-cmake -B build
-cmake --install build
-```
-
-3. Use in your project
+2. Use in your project
 
 ```cmake
-# in your CMakeLists.txt
+# CMakeLists.txt
 find_package(kero_variant_utils REQUIRED)
 
-target_include_directories(<your_target> PRIVATE ${kero_variant_utils_SOURCE_DIR})
+target_link_libraries(<your_target> PRIVATE kero::kero_variant_utils) # ensure kero:: prefix
+```
+
+### Manual Installation
+
+1. Download
+
+```bash
+curl -fsSL https://github.com/oneofthezombies/kero-variant-utils/archive/refs/tags/v0.3.0.tar.gz -o kero_variant_utils.tar.gz
+mkdir -p kero_variant_utils
+tar -C kero_variant_utils --strip-components=1 -xf kero_variant_utils.tar.gz
+```
+
+2. Add include search path
+
+```bash
+clang -I<kero_variant_utils_path>
+# or
+g++ -I<kero_variant_utils_path>
 ```
 
 ## Compiler and Standard Support
