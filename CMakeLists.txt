@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(
   kero_variant_utils
-  VERSION 0.2.1
+  VERSION 0.3.0
   LANGUAGES CXX)
 
 add_library(kero_variant_utils INTERFACE)
