@@ -1,4 +1,4 @@
-#include "kero_variant_utils/kero_variant_utils.h"
+#include "kero/variant_utils.h"
 
 #include <gtest/gtest.h>
 
@@ -6,7 +6,7 @@
 
 namespace kero {
 
-TEST(KeroVariantUtilsIsInvocable, StructVisitor) {
+TEST(VariantUtilsIsInvocable, StructVisitor) {
   struct MyVisitor {
     void operator()(int) {}
   };
@@ -14,13 +14,13 @@ TEST(KeroVariantUtilsIsInvocable, StructVisitor) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocable, LambdaVisitor) {
+TEST(VariantUtilsIsInvocable, LambdaVisitor) {
   auto visitor = [](int) {};
   auto result = kero::variant_utils::IsInvocable<decltype(visitor), int>();
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize1) {
+TEST(VariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize1) {
   struct MyVisitor {
     void operator()(int) {}
   };
@@ -31,7 +31,7 @@ TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize1) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize2) {
+TEST(VariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize2) {
   struct MyVisitor {
     void operator()(int) {}
   };
@@ -50,7 +50,7 @@ TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, StructVisitorVariantSize2) {
   }
 }
 
-TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex,
+TEST(VariantUtilsIsInvocableAlternativeAtIndex,
      OverloadedStructVisitorVariantSize2) {
   struct MyVisitor {
     void operator()(int) {}
@@ -71,7 +71,7 @@ TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex,
   }
 }
 
-TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize1) {
+TEST(VariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize1) {
   using MyVariant = std::variant<int>;
   auto visitor = [](int) {};
   auto result =
@@ -80,7 +80,7 @@ TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize1) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize2) {
+TEST(VariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   auto visitor = [](int) {};
   {
@@ -97,7 +97,7 @@ TEST(KeroVariantUtilsIsInvocableAlternativeAtIndex, LambdaVisitorVariantSize2) {
   }
 }
 
-TEST(KeroVariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize1) {
+TEST(VariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize1) {
   using MyVariant = std::variant<int>;
   struct MyVisitor {
     void operator()(int) {}
@@ -108,7 +108,7 @@ TEST(KeroVariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize1) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize2) {
+TEST(VariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   struct MyVisitor {
     void operator()(int) {}
@@ -119,7 +119,7 @@ TEST(KeroVariantUtilsIsInvocableAllAlternatives, StructVisitorVariantSize2) {
   EXPECT_FALSE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAllAlternatives,
+TEST(VariantUtilsIsInvocableAllAlternatives,
      OverloadedStructVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   struct MyVisitor {
@@ -132,7 +132,7 @@ TEST(KeroVariantUtilsIsInvocableAllAlternatives,
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize1) {
+TEST(VariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize1) {
   using MyVariant = std::variant<int>;
   auto visitor = [](int) {};
   auto result =
@@ -142,7 +142,7 @@ TEST(KeroVariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize1) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize2) {
+TEST(VariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   auto visitor = [](int) {};
   {
@@ -154,7 +154,7 @@ TEST(KeroVariantUtilsIsInvocableAllAlternatives, LambdaVisitorVariantSize2) {
   }
 }
 
-TEST(KeroVariantUtilsMakeVisitor, VariantSize1) {
+TEST(VariantUtilsMakeVisitor, VariantSize1) {
   using MyVariant = std::variant<int>;
   auto visitor = kero::variant_utils::MakeVisitor([](int) {});
   using MyVisitor = decltype(visitor);
@@ -176,7 +176,7 @@ TEST(KeroVariantUtilsMakeVisitor, VariantSize1) {
   }
 }
 
-TEST(KeroVariantUtilsMakeVisitor, VariantSize2) {
+TEST(VariantUtilsMakeVisitor, VariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   auto visitor =
       kero::variant_utils::MakeVisitor([](int) {}, [](std::string) {});
@@ -205,7 +205,7 @@ TEST(KeroVariantUtilsMakeVisitor, VariantSize2) {
   }
 }
 
-TEST(KeroVariantUtilsVisit, StructVisitorVariantSize1) {
+TEST(VariantUtilsVisit, StructVisitorVariantSize1) {
   using MyVariant = std::variant<int>;
   struct MyVisitor {
     bool operator()(int) { return true; }
@@ -215,7 +215,7 @@ TEST(KeroVariantUtilsVisit, StructVisitorVariantSize1) {
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsVisit, StructVisitorVariantSize2) {
+TEST(VariantUtilsVisit, StructVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   struct MyVisitor {
     int operator()(int) { return 1; }
@@ -233,14 +233,14 @@ TEST(KeroVariantUtilsVisit, StructVisitorVariantSize2) {
   }
 }
 
-TEST(KeroVariantUtilsVisit, LambdaVisitorVariantSize1) {
+TEST(VariantUtilsVisit, LambdaVisitorVariantSize1) {
   using MyVariant = std::variant<int>;
   MyVariant variant = 42;
   auto result = kero::Visit(variant, [](int) { return true; });
   EXPECT_TRUE(result);
 }
 
-TEST(KeroVariantUtilsVisit, LambdaVisitorVariantSize2) {
+TEST(VariantUtilsVisit, LambdaVisitorVariantSize2) {
   using MyVariant = std::variant<int, std::string>;
   MyVariant variant = 42;
   {

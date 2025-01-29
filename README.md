@@ -15,6 +15,8 @@ This library is perfect for scenarios where exhaustive handling of `std::variant
 ## Examples
 
 ```cpp
+#include <kero/variant_utils.h>
+
 struct MyValue {};
 struct MyError {};
 using MyResult = std::variant<MyValue, MyError>;
@@ -46,7 +48,7 @@ FetchContent_Declare(
   GIT_TAG v0.3.0)
 FetchContent_MakeAvailable(kero_variant_utils)
 
-target_link_libraries(<your_target> PRIVATE kero_variant_utils)
+target_link_libraries(<your_target> PRIVATE kero::variant_utils)
 ```
 
 ### Using Installable CMake Package
@@ -68,7 +70,7 @@ rm -rf kero_variant_utils.tar.gz kero_variant_utils
 # CMakeLists.txt
 find_package(kero_variant_utils REQUIRED)
 
-target_link_libraries(<your_target> PRIVATE kero::kero_variant_utils) # ensure kero:: prefix
+target_link_libraries(<your_target> PRIVATE kero::variant_utils)
 ```
 
 ### Manual Installation
